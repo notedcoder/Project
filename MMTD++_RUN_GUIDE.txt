@@ -1,0 +1,56 @@
+MMTD++ ENHANCED MODEL
+======================
+
+STEP-BY-STEP INSTRUCTIONS FOR RUNNING LOCALLY
+
+Prerequisites:
+--------------
+- Python 3.8 or higher
+- Required libraries:
+  pip install transformers torch timm scikit-learn pandas pillow langdetect
+
+Folder Structure:
+-----------------
+project/
+├── edp_dataset.csv            <- Your dataset file (same as original)
+├── images/                    <- Folder of rendered email images
+├── main_mmtd_plus.py
+├── models_mmtd_plus.py
+├── dataset_mmtd_plus.py
+├── losses.py
+
+How to Run:
+-----------
+
+1. Prepare Dataset:
+   - Ensure edp_dataset.csv and images/ are in the working directory
+   - CSV columns: text, image_path, label (label: 0 = ham, 1 = spam)
+
+2. Run the Training + Evaluation:
+   python main_mmtd_plus.py \
+       --csv edp_dataset.csv \
+       --img_dir images \
+       --text_model bert-base-multilingual-cased \
+       --image_model google/vit-base-patch16-224 \
+       --epochs 5 \
+       --batch_size 8
+
+3. View Results:
+   - Loss per epoch will be shown
+   - Final output will include:
+     - Confusion Matrix
+     - Precision / Recall / F1 Score
+
+Customization Tips:
+-------------------
+- Use different text/image models from HuggingFace
+- Increase epochs, change batch size, adjust learning rate
+- Improve multilingual detection by refining langdetect
+
+This setup includes:
+- Focal Loss
+- Cross-modal attention fusion
+- Language embedding
+- Full modular code structure
+
+Created for IEEE-style research development
